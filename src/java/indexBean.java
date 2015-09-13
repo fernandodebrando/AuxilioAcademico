@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 
+import Model.GradeCurricular;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -11,14 +14,31 @@ import javax.faces.bean.SessionScoped;
  *
  * @author fernando
  */
-@ManagedBean(name = "indexBean1")
+@ManagedBean(name = "indexBean")
 @SessionScoped
 public class indexBean {
 
+    public ArrayList<String> grade = null;
+
     /**
      * Creates a new instance of indexBean
+    
      */
     public indexBean() {
+
     }
-    
+
+    public ArrayList<String> getGrade() throws SQLException {
+
+        GradeCurricular gradeCurricular = new GradeCurricular();
+        this.grade = gradeCurricular.list();
+
+        return grade;
+    }
+
+    public void setGrade(ArrayList<String> grade) {
+
+        this.grade = grade;
+    }
+
 }
