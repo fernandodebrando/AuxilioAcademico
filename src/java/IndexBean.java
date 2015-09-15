@@ -16,7 +16,7 @@ import javax.faces.bean.SessionScoped;
  */
 @ManagedBean(name = "indexBean")
 @SessionScoped
-public class indexBean {
+public class IndexBean {
 
     public ArrayList<String> grade = null;
 
@@ -24,7 +24,7 @@ public class indexBean {
      * Creates a new instance of indexBean
     
      */
-    public indexBean() {
+    public IndexBean() {
 
     }
 
