@@ -15,17 +15,15 @@ import java.util.ArrayList;
  */
 public class GradeCurricular {
 
-    public ArrayList<String> list() throws SQLException {
+    public ArrayList<ArrayList<String>> list() throws SQLException {
 
-        ArrayList<String> arrayList = new ArrayList();
+        ArrayList<ArrayList<String>> arrayList = new ArrayList();
         ExecuteSQL exec = new ExecuteSQL();
         String sql = "select *, p.nome as nome_professor, td.id as id_turma_disciplina,\n"
                 + "		(SELECT situacao \n"
                 + "			FROM aluno_turma_disciplina as atd \n"
                 + "			WHERE atd.id_turma_disciplina = td.id) as situacao \n"
-                + "from aluno as a \n"
-                + "join aluno_curso as ac on(a.id = ac.id_aluno) \n"
-                + "join curso as c on(ac.id_curso = c.id) \n"
+                + "from curso as c \n"
                 + "join curso_disciplina as cd on (c.id = cd.id_curso) \n"
                 + "join disciplina as d on(cd.id_disciplina = d.id) \n"
                 + "join turma_disciplina as td on(d.id = td.id_disciplina) \n"
@@ -35,7 +33,23 @@ public class GradeCurricular {
         ResultSet rs = exec.select(sql);
 
         while (rs.next()) {
-            arrayList.add(rs.getString("nome_disciplina"));
+           ArrayList<String> arrayString = new ArrayList();
+            arrayString.add(rs.getString("nome"));
+            arrayString.add(rs.getString("nome_disciplina"));
+            arrayString.add(rs.getString("horas"));
+            arrayString.add(rs.getString("semestre"));
+            arrayString.add(rs.getString("ead"));
+            arrayString.add(rs.getString("pre_requisito"));
+            arrayString.add(rs.getString("caracterizacao"));
+            arrayString.add(rs.getString("competencia_essencial"));
+            arrayString.add(rs.getString("nivel_dificuldade"));
+            arrayString.add(rs.getString("sala"));
+            arrayString.add(rs.getString("dia_semana"));
+            arrayString.add(rs.getString("turno"));
+            arrayString.add(rs.getString("nome_professor"));
+            arrayString.add(rs.getString("curriculo"));
+            
+            arrayList.add(arrayString);
         }
 
         return arrayList;

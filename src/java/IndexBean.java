@@ -1,44 +1,42 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-import Model.GradeCurricular;
-import java.sql.SQLException;
-import java.util.ArrayList;
+ 
+import java.io.Serializable;
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-
-/**
- *
- * @author fernando
- */
-@ManagedBean(name = "indexBean")
-@SessionScoped
-public class IndexBean {
-
-    public ArrayList<String> grade = null;
-
-    /**
-     * Creates a new instance of indexBean
-    
-     */
-    public IndexBean() {
-
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.ViewScoped;
+import org.primefaces.model.TreeNode;
+import Model.Curso;
+import Model.CursoService;
+ 
+@ManagedBean(name="indexBean")
+@ViewScoped
+public class IndexBean implements Serializable {
+     
+    private TreeNode root;
+     
+    private Curso selectedCurso;
+         
+    @ManagedProperty("#{cursoService}")
+    private CursoService service;
+     
+    @PostConstruct
+    public void init() {
+        root = service.createCursos();
     }
-
-    public ArrayList<String> getGrade() throws SQLException {
-
-        GradeCurricular gradeCurricular = new GradeCurricular();
-        this.grade = gradeCurricular.list();
-
-        return grade;
+ 
+    public TreeNode getRoot() {
+        return root;
     }
-
-    public void setGrade(ArrayList<String> grade) {
-
-        this.grade = grade;
+ 
+    public void setService(CursoService service) {
+        this.service = service;
     }
-
+ 
+    public Curso getSelectedCurso() {
+        return selectedCurso;
+    }
+ 
+    public void setSelectedCurso(Curso selectedCurso) {
+        this.selectedCurso = selectedCurso;
+    }
 }
