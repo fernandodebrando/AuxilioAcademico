@@ -10,12 +10,14 @@
     <ui:define name="content">
         <h:form>
             <p:panelGrid columns="2">
-            <p:outputLabel for="idNomeCurso" value="Curso:"/>
-            <p:inputText id="idNomeCurso" value="#{cadastroCursoBean.nomecurso}"  />
-            <p:commandButton action="#{cadastroCursoBean.cadastrarCurso()}" type="button" value="Cadastrar" icon="ui-icon-extlink"/>
-            <p:commandButton action="#{cadastroCursoBean.cadastrarCurso()}" type="button" value="Cancelar" icon="ui-icon-extlink"/>
+
+                <p:outputLabel for="idNome" value="Nome da Turma: "/>
+                <p:inputText id="idNome" value="#{cadastroTurmaBean.nome}"/>
+
+                <p:commandButton action="#{cadastroTurmaBean.cadastroTurma()}" type="button" value="Cadastrar" icon="ui-icon-extlink"/>
+                <p:commandButton action="#{cadastroTurmaBean.cadastroTurma()}" type="button" value="Cancelar" icon="ui-icon-extlink"/>
             </p:panelGrid>
-             <h:messages id="idMensagem" showDetail="true" errorClass="mensagem"/>
+            <h:messages id="idMensagem" showDetail="true" errorClass="mensagem"/>
         </h:form>     
     </ui:define>
 
