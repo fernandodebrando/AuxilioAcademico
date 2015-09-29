@@ -36,5 +36,22 @@ public class ExecuteSQL extends ConexaoMySQL {
         }
        return null;
     }
+    public ResultSet inserir(String query) throws SQLException{
+        try {
+            Connection connection = getConexaoMySQL();
+
+            this.stmt = connection.createStatement();
+            return stmt.executeQuery(query);
+            
+        } catch (SQLException e) {
+
+            System.out.println(e.getMessage());
+
+        } finally {
+            fecharConexao();            
+            //stmt.close();
+        }
+       return null;
+    }
 
 }
