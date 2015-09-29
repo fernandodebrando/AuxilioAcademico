@@ -1,91 +1,144 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package Model;
- 
-import java.io.Serializable;
- 
-public class Curso implements Serializable, Comparable<Curso> {
- 
-    private String name;
-     
-    private String size;
-     
-    private String type;
-     
-    public Curso(String name, String size, String type) {
-        this.name = name;
-        this.size = size;
-        this.type = type;
-    }
- 
-    public String getName() {
-        return name;
-    }
- 
-    public void setName(String name) {
-        this.name = name;
-    }
- 
-    public String getSize() {
-        return size;
-    }
- 
-    public void setSize(String size) {
-        this.size = size;
-    }
- 
-    public String getType() {
-        return type;
-    }
- 
-    public void setType(String type) {
-        this.type = type;
-    }
- 
-    //Eclipse Generated hashCode and equals
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((name == null) ? 0 : name.hashCode());
-        result = prime * result + ((size == null) ? 0 : size.hashCode());
-        result = prime * result + ((type == null) ? 0 : type.hashCode());
-        return result;
-    }
- 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Curso other = (Curso) obj;
-        if (name == null) {
-            if (other.name != null)
-                return false;
-        } else if (!name.equals(other.name))
-            return false;
-        if (size == null) {
-            if (other.size != null)
-                return false;
-        } else if (!size.equals(other.size))
-            return false;
-        if (type == null) {
-            if (other.type != null)
-                return false;
-        } else if (!type.equals(other.type))
-            return false;
-        return true;
-    }
- 
-    @Override
-    public String toString() {
-        return name;
-    } 
-    
 
-    @Override
-    public int compareTo(Curso o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+import javax.faces.bean.ApplicationScoped;
+
+/**
+ *
+ * @author fernando
+ */
+@ApplicationScoped
+public class Curso {
+
+    private String nome;
+    private String nomeDisciplina;
+    private String horas;
+    private String semestre;
+    private String ead;
+    private String preRequisito;
+    private String caracterizacao;
+    private String competenciaEssencial;
+    private String nivelDificuldade;
+    private String sala;
+    private String diaSemana;
+    private String turno;
+    private String nomeProfessor;
+    private String curriculo;
+
+    public String getNome() {
+        return nome;
     }
-}  
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getNomeDisciplina() {
+        return nomeDisciplina;
+    }
+
+    public void setNomeDisciplina(String nomeDisciplina) {
+        this.nomeDisciplina = nomeDisciplina;
+    }
+
+    public String getHoras() {
+        return horas;
+    }
+
+    public void setHoras(String horas) {
+        this.horas = horas;
+    }
+
+    public String getSemestre() {
+        return semestre;
+    }
+
+    public void setSemestre(String semestre) {
+        this.semestre = semestre;
+    }
+
+    public String getEad() {
+        return ead;
+    }
+
+    public void setEad(String ead) {
+        this.ead = ead;
+    }
+
+    public String getPreRequisito() {
+        return preRequisito;
+    }
+
+    public void setPreRequisito(String preRequisito) {
+        this.preRequisito = preRequisito;
+    }
+
+    public String getCaracterizacao() {
+        return caracterizacao;
+    }
+
+    public void setCaracterizacao(String caracterizacao) {
+        this.caracterizacao = caracterizacao;
+    }
+
+    public String getCompetenciaEssencial() {
+        return competenciaEssencial;
+    }
+
+    public void setCompetenciaEssencial(String competenciaEssencial) {
+        this.competenciaEssencial = competenciaEssencial;
+    }
+
+    public String getNivelDificuldade() {
+        return nivelDificuldade;
+    }
+
+    public void setNivelDificuldade(String nivelDificuldade) {
+        this.nivelDificuldade = nivelDificuldade;
+    }
+
+    public String getSala() {
+        return sala;
+    }
+
+    public void setSala(String sala) {
+        this.sala = sala;
+    }
+
+    public String getDiaSemana() {
+        return diaSemana;
+    }
+
+    public void setDiaSemana(String diaSemana) {
+        this.diaSemana = diaSemana;
+    }
+
+    public String getTurno() {
+        return turno;
+    }
+
+    public void setTurno(String turno) {
+        this.turno = turno;
+    }
+
+    public String getNomeProfessor() {
+        return nomeProfessor;
+    }
+
+    public void setNomeProfessor(String nomeProfessor) {
+        this.nomeProfessor = nomeProfessor;
+    }
+
+    public String getCurriculo() {
+        return curriculo;
+    }
+
+    public void setCurriculo(String curriculo) {
+        this.curriculo = curriculo;
+    }
+
+}

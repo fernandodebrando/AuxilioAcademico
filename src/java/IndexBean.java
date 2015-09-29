@@ -1,37 +1,38 @@
  
+import Model.Curso;
+import Model.GradeCurricular;
 import java.io.Serializable;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
-import org.primefaces.model.TreeNode;
-import Model.Curso;
-import Model.CursoService;
+
  
 @ManagedBean(name="indexBean")
 @ViewScoped
 public class IndexBean implements Serializable {
-     
-    private TreeNode root;
+  
+ 
+    private List<Curso> cursos;
      
     private Curso selectedCurso;
-         
-    @ManagedProperty("#{cursoService}")
-    private CursoService service;
-     
+      
     @PostConstruct
     public void init() {
-        root = service.createCursos();
+        GradeCurricular gc = new GradeCurricular();
+        try{
+            
+        cursos = gc.list();
+        
+        }catch(Exception e){
+            
+        }
     }
- 
-    public TreeNode getRoot() {
-        return root;
+    
+    public List<Curso> getCursos() {
+        return cursos;
     }
- 
-    public void setService(CursoService service) {
-        this.service = service;
-    }
- 
+     
     public Curso getSelectedCurso() {
         return selectedCurso;
     }
@@ -39,4 +40,6 @@ public class IndexBean implements Serializable {
     public void setSelectedCurso(Curso selectedCurso) {
         this.selectedCurso = selectedCurso;
     }
+    
+    
 }
