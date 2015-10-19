@@ -1,0 +1,164 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./template.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui" 
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns="http://www.w3.org/1999/xhtml">
+
+    <ui:define name="content">
+        <h:form id="form">
+            <center>
+            <h1>Curso Superior de Tecnologia em Análise e Desenvolvimento de Sistemas </h1>
+            </center>
+
+            <p:dataGrid var="curso" value="#{indexBean.cursos}" columns="6" 
+                        rows="6" paginator="false" id="cursos1">
+                <f:facet name="header">
+                    1º Semestre
+                </f:facet>
+                <p:panel header="#{curso.diaSemana}" style="text-align:center" rendered="#{curso.semestre == 1}">
+                    <h:panelGrid columns="1" style="width:100%">
+
+                        <h:outputText value="- #{curso.nomeDisciplina}" />
+                        <h:outputText value="- #{curso.nomeProfessor}" />
+
+                        <p:commandLink update=":form:cursoDetail" oncomplete="PF('cursoDialog').show()" title="View Detail">
+                            <h:outputText styleClass="ui-icon ui-icon-search" style="margin:0 auto;" />
+                            <f:setPropertyActionListener value="#{curso}" target="#{indexBean.selectedCurso}" />
+                        </p:commandLink>
+                    </h:panelGrid>
+                </p:panel>                
+            </p:dataGrid>
+            
+            <p:dataGrid var="curso" value="#{indexBean.cursos}" columns="6" 
+                        rows="6" paginator="false" id="cursos2">
+                <f:facet name="header">
+                    2º Semestre
+                </f:facet>
+                <p:panel header="#{curso.diaSemana}" style="text-align:center" rendered="#{curso.semestre == 1}">
+                    <h:panelGrid columns="1" style="width:100%">
+
+                        <h:outputText value="- #{curso.nomeDisciplina}" />
+                        <h:outputText value="- #{curso.nomeProfessor}" />
+
+                        <p:commandLink update=":form:cursoDetail" oncomplete="PF('cursoDialog').show()" title="View Detail">
+                            <h:outputText styleClass="ui-icon ui-icon-search" style="margin:0 auto;" />
+                            <f:setPropertyActionListener value="#{curso}" target="#{indexBean.selectedCurso}" />
+                        </p:commandLink>
+                    </h:panelGrid>
+                </p:panel>
+            </p:dataGrid>
+            
+             <p:dataGrid var="curso" value="#{indexBean.cursos}" columns="6" 
+                        rows="6" paginator="false" id="cursos3">
+                <f:facet name="header">
+                    3º Semestre
+                </f:facet>
+                <p:panel header="#{curso.diaSemana}" style="text-align:center" rendered="#{curso.semestre == 1}">
+                    <h:panelGrid columns="1" style="width:100%">
+
+                        <h:outputText value="- #{curso.nomeDisciplina}" />
+                        <h:outputText value="- #{curso.nomeProfessor}" />
+
+                        <p:commandLink update=":form:cursoDetail" oncomplete="PF('cursoDialog').show()" title="View Detail">
+                            <h:outputText styleClass="ui-icon ui-icon-search" style="margin:0 auto;" />
+                            <f:setPropertyActionListener value="#{curso}" target="#{indexBean.selectedCurso}" />
+                        </p:commandLink>
+                    </h:panelGrid>
+                </p:panel>
+            </p:dataGrid>
+            
+             <p:dataGrid var="curso" value="#{indexBean.cursos}" columns="6" 
+                        rows="6" paginator="false" id="cursos4">
+                <f:facet name="header">
+                    4º Semestre
+                </f:facet>
+                <p:panel header="#{curso.diaSemana}" style="text-align:center" rendered="#{curso.semestre == 1}">
+                    <h:panelGrid columns="1" style="width:100%">
+
+                        <h:outputText value="- #{curso.nomeDisciplina}" />
+                        <h:outputText value="- #{curso.nomeProfessor}" />
+
+                        <p:commandLink update=":form:cursoDetail" oncomplete="PF('cursoDialog').show()" title="View Detail">
+                            <h:outputText styleClass="ui-icon ui-icon-search" style="margin:0 auto;" />
+                            <f:setPropertyActionListener value="#{curso}" target="#{indexBean.selectedCurso}" />
+                        </p:commandLink>
+                    </h:panelGrid>
+                </p:panel>
+            </p:dataGrid>
+            
+             <p:dataGrid var="curso" value="#{indexBean.cursos}" columns="6" 
+                        rows="6" paginator="false" id="cursos5">
+                <f:facet name="header">
+                    5º Semestre
+                </f:facet>
+                <p:panel header="#{curso.diaSemana}" style="text-align:center" rendered="#{curso.semestre == 1}">
+                    <h:panelGrid columns="1" style="width:100%">
+
+                        <h:outputText value="- #{curso.nomeDisciplina}" />
+                        <h:outputText value="- #{curso.nomeProfessor}" />
+
+                        <p:commandLink update=":form:cursoDetail" oncomplete="PF('cursoDialog').show()" title="View Detail">
+                            <h:outputText styleClass="ui-icon ui-icon-search" style="margin:0 auto;" />
+                            <f:setPropertyActionListener value="#{curso}" target="#{indexBean.selectedCurso}" />
+                        </p:commandLink>
+                    </h:panelGrid>
+                </p:panel>
+            </p:dataGrid>
+
+            <p:dataGrid var="curso" value="#{indexBean.cursos}" columns="6" 
+                        rows="6" paginator="false" id="cursos6">
+                <f:facet name="header">
+                    6º Semestre
+                </f:facet>
+                <p:panel header="#{curso.diaSemana}" style="text-align:center" rendered="#{curso.semestre == 1}">
+                    <h:panelGrid columns="1" style="width:100%">
+
+                        <h:outputText value="- #{curso.nomeDisciplina}" />
+                        <h:outputText value="- #{curso.nomeProfessor}" />
+
+                        <p:commandLink update=":form:cursoDetail" oncomplete="PF('cursoDialog').show()" title="View Detail">
+                            <h:outputText styleClass="ui-icon ui-icon-search" style="margin:0 auto;" />
+                            <f:setPropertyActionListener value="#{curso}" target="#{indexBean.selectedCurso}" />
+                        </p:commandLink>
+                    </h:panelGrid>
+                </p:panel>
+            </p:dataGrid>
+
+            <p:dialog header="Informação Detalhada da Disciplina" width="800" widgetVar="cursoDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                <p:outputPanel id="cursoDetail" style="text-align:center;">
+                    <p:panelGrid  columns="2" rendered="#{not empty indexBean.selectedCurso}" columnClasses="label,value">
+                        <f:facet name="header">
+                            #{indexBean.selectedCurso.nomeDisciplina}
+                        </f:facet>
+
+                        <h:outputText value="Descrição: " />
+                        <h:outputText value="#{indexBean.selectedCurso.caracterizacao}" />
+
+                        <h:outputText value="Competência: " />
+                        <h:outputText value="#{indexBean.selectedCurso.competenciaEssencial}" />
+
+                        <h:outputText value="Pré-requisito: " />
+                        <h:outputText value="#{indexBean.selectedCurso.preRequisito}"/>
+
+                        <h:outputText value="Semestre: " />
+                        <h:outputText value="#{indexBean.selectedCurso.semestre}º Semestre" />  
+                        
+                        <h:outputText value="Horas:  " />
+                        <h:outputText value="#{indexBean.selectedCurso.horas}" />                        
+                                              
+                        <h:outputText value="Turno:  " />
+                        <h:outputText value="#{indexBean.selectedCurso.turno}" />
+                        
+                        <h:outputText value="Professor:  " />
+                        <h:outputText value="#{indexBean.selectedCurso.nomeProfessor}" />
+                         <h:outputText value="Formação:  " />
+                        <h:outputText value="#{indexBean.selectedCurso.curriculo}" />
+                    </p:panelGrid>
+                </p:outputPanel>
+            </p:dialog>
+        </h:form>
+    </ui:define>
+</ui:composition>

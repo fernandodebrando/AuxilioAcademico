@@ -8,11 +8,13 @@ package Model;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import javax.faces.bean.ApplicationScoped;
 
 /**
  *
  * @author fernando
  */
+@ApplicationScoped
 public class GradeCurricular {
 
     public String getDiaSemana(int diaS) {
@@ -61,7 +63,7 @@ public class GradeCurricular {
                     + "join turma as t on(td.id_turma = t.id)\n"
                     + "join cad_turma as ct on(t.id_cad_turma = ct.id) \n"
                     + "join professor as p on(p.id = td.id_professor)";
-            ResultSet rs = exec.select(sql);
+            ResultSet rs = exec.executeQuery(sql);
 
             while (rs.next()) {
                 Curso c = new Curso();

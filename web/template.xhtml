@@ -4,7 +4,8 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"     
       xmlns:p="http://primefaces.org/ui" 
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -19,49 +20,31 @@
             <ui:insert name="top">
                 <h:form>  
                     <p:growl id="messages"/>
+                    <p:menubar>   
+                        <p:menuitem value="Home" url="/" icon="ui-icon-home" />
+                        <c:if test="#{userLoginMB.logado}">
+                            <p:menuitem value="Grade Curricular" url="/faces/gradeCurricular.xhtml" icon=" ui-icon-calculator" />
+                        </c:if>
+                        <c:if test="#{userLoginMB.idPerfil == 1}">
+                        <p:menuitem value="Cursos" url="/faces/cadastroCurso.xhtml" icon="ui-icon-gear" />
+                        </c:if>
+                        <c:if test="#{userLoginMB.idPerfil == 1}">
+                        <p:menuitem value="Turmas" url="/faces/cadastroTurma.xhtml" icon="ui-icon-gear" />
+                        </c:if>
+                        <c:if test="#{userLoginMB.idPerfil == 1}">
+                        <p:menuitem value="Disciplinas" url="/faces/cadastroDisciplina.xhtml" icon="ui-icon-gear" />
+                        </c:if>
+                        <c:if test="#{!userLoginMB.logado}">
+                            <f:facet name="options">                          
+                                <p:commandButton type="button" value="Entrar" icon="ui-icon-extlink" id="btnLogin" class="btnLogin" onclick="PF('dlg').show();"/>
+                            </f:facet>    
+                        </c:if>
+                        <c:if test="#{userLoginMB.logado}">
+                            <f:facet name="options">                              
+                                <p:commandButton value="Sair" type="button" icon="ui-icon-extlink" onclick="PF('dlg2').show();"/>
+                            </f:facet>
+                        </c:if>
 
-                    <p:menubar>
-                        <p:submenu label="File" icon="ui-icon-document">
-                            <p:submenu label="New" icon="ui-icon-contact">
-                                <p:menuitem value="Project" url="#" />
-                                <p:menuitem value="Other" url="#" />
-                            </p:submenu>
-                            <p:menuitem value="Open" url="#" />
-                            <p:separator />
-                            <p:menuitem value="Quit" url="#" />
-                        </p:submenu>
-
-                        <p:submenu label="Edit" icon="ui-icon-pencil">
-                            <p:menuitem value="Undo" url="#" icon="ui-icon-arrowreturnthick-1-w" />
-                            <p:menuitem value="Redo" url="#" icon="ui-icon-arrowreturnthick-1-e" />
-                        </p:submenu>
-
-                        <p:submenu label="Help" icon="ui-icon-help">
-                            <p:menuitem value="Contents" url="#" />
-                            <p:submenu label="Search" icon="ui-icon-search">
-                                <p:submenu label="Text">
-                                    <p:menuitem value="Workspace" url="#" />
-                                </p:submenu>
-                                <p:menuitem value="File" url="#" />
-                            </p:submenu>
-                        </p:submenu>
-
-                        <p:submenu label="Actions" icon="ui-icon-gear">
-                            <p:submenu label="Ajax" icon="ui-icon-refresh">
-                                <p:menuitem value="Save" actionListener="#{menuView.save}" icon="ui-icon-disk" update="messages"/>
-                                <p:menuitem value="Update" actionListener="#{menuView.update}" icon="ui-icon-arrowrefresh-1-w" update="messages"/>
-                            </p:submenu>
-                            <p:submenu label="Non-Ajax" icon="ui-icon-newwin">
-                                <p:menuitem value="Delete" actionListener="#{menuView.delete}" icon="ui-icon-close" update="messages" ajax="false"/>
-                            </p:submenu>
-                        </p:submenu>
-
-                        <p:menuitem value="Quit" url="http://www.primefaces.org" icon="ui-icon-close" />
-
-                        <f:facet name="options">
-                            <p:inputText style="margin-right:10px" placeholder="Search"/>
-                            <p:commandButton type="button" value="Login" icon="ui-icon-extlink" onclick="PF('dlg').show();"/>
-                        </f:facet>
                     </p:menubar>
                 </h:form>
             </ui:insert>
@@ -72,14 +55,27 @@
             <p:dialog header="Login" widgetVar="dlg" resizable="false">
                 <h:panelGrid columns="2" cellpadding="5">
                     <h:outputLabel for="username" value="E-mail:" />
-                    <p:inputText id="username" value="#{userLoginMB.username}" required="true" label="username" requiredMessage="Campo obrigatório." />
+                    <p:inputText id="username" value="#{userLoginMB.username}" required="true" label="username" requiredMessage="Campo obrigatório." style="width: 100%;" />
 
                     <h:outputLabel for="password" value="Senha:" />
-                    <p:password id="password" value="#{userLoginMB.password}" required="true" label="password" requiredMessage="Campo obrigatório."/>
+                    <p:password id="password" value="#{userLoginMB.password}" required="true" label="password" requiredMessage="Campo obrigatório." style="width: 100%;"/>
 
                     <f:facet name="footer">
                         <p:commandButton value="Login" update="growl" actionListener="#{userLoginMB.login}"
-                                         oncomplete="handleLoginRequest(xhr, status, args)" />
+                                         oncomplete="handleLoginRequest(xhr, status, args)" style="float:right;" />
+                    </f:facet>  
+                </h:panelGrid>
+            </p:dialog>
+        </h:form>
+
+        <h:form>  
+            <p:growl id="growl2" sticky="true" showDetail="true" life="3000" />
+            <p:dialog header="Logout" widgetVar="dlg2" resizable="false">
+                <h:panelGrid columns="2" cellpadding="5">
+                    <h:outputLabel  value="Deseja realmente sair?" />
+                    <f:facet name="footer">
+                        <p:commandButton value="Sair" update="growl2" actionListener="#{userLoginMB.logout}"
+                                         oncomplete="handleLogoutRequest(xhr, status, args)"/>
                     </f:facet>  
                 </h:panelGrid>
             </p:dialog>
@@ -93,18 +89,23 @@
                 else {
                     PF('dlg').hide();
                     $('#loginLink').fadeOut();
+                    location.reload();
                 }
+            }
+            function handleLogoutRequest(xhr, status, args) {
+                PF('dlg2').hide();
+                location.reload();
             }
         </script>  
 
-        <div id="content" class="center_content">
+        <div id="content" class="center_content" style="width: 85%; margin: 0 auto;">
             <ui:insert name="content">Content</ui:insert>
         </div>
 
         <div id="bottom">
             <ui:insert name="bottom">Rodapé</ui:insert>
         </div>
-
+       
     </h:body>
 
 </html>

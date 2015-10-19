@@ -5,6 +5,9 @@
  */
 package Model;
 
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 import javax.faces.bean.ApplicationScoped;
 
 /**
@@ -14,6 +17,7 @@ import javax.faces.bean.ApplicationScoped;
 @ApplicationScoped
 public class Curso {
 
+    private Integer id;
     private String nome;
     private String nomeDisciplina;
     private String horas;
@@ -28,6 +32,14 @@ public class Curso {
     private String turno;
     private String nomeProfessor;
     private String curriculo;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getNome() {
         return nome;
@@ -139,6 +151,71 @@ public class Curso {
 
     public void setCurriculo(String curriculo) {
         this.curriculo = curriculo;
+    }
+
+    public List<Curso> list() {
+
+        try {
+
+            List<Curso> arrayList = new ArrayList();
+            ExecuteSQL exec = new ExecuteSQL();
+            String sql = "select * "
+                    + "from curso as c \n";
+
+            ResultSet rs = exec.executeQuery(sql);
+
+            while (rs.next()) {
+                Curso c = new Curso();
+                c.setId(Integer.parseInt(rs.getString("id")));
+                c.setNome(rs.getString("nome"));
+                arrayList.add(c);
+            }
+
+            return arrayList;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+
+    }
+
+    public Boolean salvar(Integer idCurso, String nomeCurso) {
+
+        try {
+
+            String sql = "";
+            ExecuteSQL exec = new ExecuteSQL();
+            if (idCurso> 0) {
+                sql = "update curso set nome = '" + nomeCurso + "' where id = " + idCurso;
+            } else {
+                sql = "insert into curso ('nome') values('" + nomeCurso+ "')";
+            }
+
+            ResultSet rs = exec.executeQuery(sql);
+
+            return true;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
+
+    }
+
+    public Boolean excluir(Integer idCurso) {
+
+        try {
+
+            ExecuteSQL exec = new ExecuteSQL();
+            String sql = "delete from curso where id = " + idCurso;
+
+            ResultSet rs = exec.executeQuery(sql);
+
+            return true;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
+
     }
 
 }

@@ -14,11 +14,11 @@ import java.sql.Statement;
  *
  * @author fernando
  */
-public class ExecuteSQL extends ConexaoMySQL {
+public class ExecuteSQL extends ConexaoMySQL { 
 
     private Statement stmt = null;
 
-    public ResultSet select(String query) throws SQLException {
+    public ResultSet executeQuery(String query) throws SQLException {
 
         try {
             Connection connection = getConexaoMySQL();
@@ -35,23 +35,6 @@ public class ExecuteSQL extends ConexaoMySQL {
             //stmt.close();
         }
        return null;
-    }
-    public ResultSet inserir(String query) throws SQLException{
-        try {
-            Connection connection = getConexaoMySQL();
-
-            this.stmt = connection.createStatement();
-            return stmt.executeQuery(query);
-            
-        } catch (SQLException e) {
-
-            System.out.println(e.getMessage());
-
-        } finally {
-            fecharConexao();            
-            //stmt.close();
-        }
-       return null;
-    }
+    }    
 
 }

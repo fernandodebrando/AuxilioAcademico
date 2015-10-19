@@ -37,7 +37,7 @@ public class CadastroTurmaBean {
         
         String cadastro = "INSERT INTO cad_disciplina (nome) VALUES ($disciplina)"; 
         
-        executa.inserir(cadastro);
+        executa.executeQuery(cadastro);
         
     }
     public CadastroTurmaBean() {

@@ -1,27 +1,23 @@
 package Model;
 
-
-import java.util.Objects;
-
+import java.sql.ResultSet;
 
 public class Usuario {
-    private String nome;
+
+    private String email;
     private String senha;
+    private Integer id;
+    private Integer idPerfil; 
 
     public Usuario() {
     }
 
-    public Usuario(String nome, String senha) {
-        this.nome = nome;
-        this.senha = senha;
+    public String getEmail() {
+        return email;
     }
 
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getSenha() {
@@ -32,21 +28,51 @@ public class Usuario {
         this.senha = senha;
     }
 
-    @Override
-    public boolean equals(Object obj) {
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getIdPerfil() {
+        return idPerfil;
+    }
+
+    public void setIdPerfil(Integer idPerfil) {
+        this.idPerfil = idPerfil;
+    }
+
+    public boolean valida(Usuario obj) {
+
         if (obj == null) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
-            return false;
+
+        try {
+
+            ExecuteSQL exec = new ExecuteSQL();
+            String sql = "select * "
+                    + "from usuario "
+                    + "where email = '" + obj.email + "' and password = '" + obj.senha + "'";
+            ResultSet rs = exec.executeQuery(sql);
+
+            if (rs != null) {
+                while (rs.next()) {
+                    this.setEmail(rs.getString("email"));
+                    this.setSenha(rs.getString("password"));
+                    this.setId(rs.getInt("id"));
+                    this.setIdPerfil(rs.getInt("id_perfil"));
+                }
+            } else {
+                return false;
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
-        final Usuario other = (Usuario) obj;
-        if (!Objects.equals(this.nome, other.nome)) {
-            return false;
-        }
-        if (!Objects.equals(this.senha, other.senha)) {
-            return false;
-        }
+
         return true;
     }
 }
