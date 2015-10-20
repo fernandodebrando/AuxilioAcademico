@@ -35,6 +35,25 @@ public class ExecuteSQL extends ConexaoMySQL {
             //stmt.close();
         }
        return null;
-    }    
+    } 
+    
+     public Boolean insert(String query) throws SQLException {
+
+        try {
+            Connection connection = getConexaoMySQL();
+
+            this.stmt = connection.createStatement();
+            return stmt.execute(query);
+            
+        } catch (SQLException e) {
+
+            System.out.println(e.getMessage());
+
+        } finally {
+            fecharConexao();            
+            //stmt.close();
+        }
+       return null;
+    }  
 
 }

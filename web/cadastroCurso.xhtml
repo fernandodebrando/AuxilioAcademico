@@ -14,7 +14,7 @@
                 <p:outputPanel id="cursoFiltro" >
                     <h:panelGrid columns="1" style="width: 100%;" columnClasses="label,value">
                         <p:outputLabel for="nomeCursoFil" value="Curso:"/>
-                        <p:inputText id="nomeCursoFil" value="#{cadastroCursoBean.selectedCurso.nome}"  style="width: 50%;"/>                        
+                        <p:inputText id="nomeCursoFil" value="#{cadastroCursoBean.nome}"  style="width: 50%;"/>                        
                         <center>
                             <p:commandButton action="#{cadastroCursoBean.buscar}" type="button" value="Buscar" icon="ui-icon-circle-zoomin"/>
 
@@ -28,22 +28,20 @@
             </p:panel>
 
             <p:dialog header="Cadastro" width="800" widgetVar="cursoCad" modal="true" showEffect="fade" hideEffect="fade" resizable="false">   
-                <p:outputPanel id="cursoCad" style="text-align:center;">  
-                    <h:form> 
-                        <p:panelGrid  columns="2" columnClasses="label,value" style="width: 100%;">  
-                            <p:outputLabel for="idCursoCad" value="ID"/>
-                            <p:inputText id="idCursoCad" value="#{cadastroCursoBean.selectedCurso.id}" readonly="true"/>
-
-                            <p:outputLabel for="nomeCursoCad" value="Curso:"/>
-                            <p:inputText id="nomeCursoCad" value="#{cadastroCursoBean.selectedCurso.nome}"  style="width: 100%;"/>
-
-                            <p:commandButton action="#{cadastroCursoBean.salvar}" value="Salvar" icon="ui-icon-circle-plus" style="float:right;"/>
-                            <p:commandButton  type="button" onclick="$('.ui-icon-closethick').click()" value="Cancelar" icon="ui-icon-circle-close"/>                      
-                        </p:panelGrid>  
-                    </h:form>
+                <p:outputPanel id="cursoCad" >  
+                    <p:panelGrid  columns="2" columnClasses="label,value" style="width: 100%;">  
+                        <p:outputLabel for="idCursoCad" value="ID"/>
+                        <p:inputText id="idCursoCad" value="#{cadastroCursoBean.id}" readonly="true"/>
+                        <p:outputLabel for="nomeCursoCad" value="Curso:"/>
+                        <p:inputText id="nomeCursoCad" value="#{cadastroCursoBean.nome}"  style="width: 100%;"/>
+                        <h:commandLink action="#{cadastroCursoBean.salvar}">
+                            <p:commandButton type="button"  value="Salvar" icon="ui-icon ui-icon-circle-plus" style="float:right;"/>
+                            <f:param name="action" value="delete" />
+                        </h:commandLink>   
+                        <p:commandButton  type="button" onclick="$('.ui-icon-closethick').click()" value="Cancelar" icon="ui-icon-circle-close"/>                      
+                    </p:panelGrid>  
                 </p:outputPanel>
-            </p:dialog>
-
+            </p:dialog> 
 
             <br></br>
         </h:form>

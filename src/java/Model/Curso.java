@@ -185,15 +185,13 @@ public class Curso {
 
             String sql = "";
             ExecuteSQL exec = new ExecuteSQL();
-            if (idCurso> 0) {
+            if (idCurso != null) {
                 sql = "update curso set nome = '" + nomeCurso + "' where id = " + idCurso;
             } else {
-                sql = "insert into curso ('nome') values('" + nomeCurso+ "')";
+                sql = "insert into curso (nome) values('" + nomeCurso+ "')";
             }
 
-            ResultSet rs = exec.executeQuery(sql);
-
-            return true;
+            return exec.insert(sql);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

@@ -3,21 +3,24 @@ import javax.faces.bean.ManagedBean;
 import Model.Curso;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ViewScoped;
-import javax.faces.event.ActionEvent;
+import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 /**
  *
  * @author Fernando
  */
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class CadastroCursoBean implements Serializable {
 
     private List<Curso> cursos;
 
     private Curso selectedCurso;
+    private Integer id;
+    private String nome;
 
     @PostConstruct
     public void init() {
@@ -43,10 +46,29 @@ public class CadastroCursoBean implements Serializable {
         this.selectedCurso = selectedCurso;
     }
 
-    public void salvar(ActionEvent event) {
-        
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+    
+    
+
+    public void salvar() {  
+         
         Curso c = new Curso();
-        //c.salvar(selectedCurso.getId(), selectedCurso.getNome());
+        c.salvar(this.getId(), this.getNome());  
+        
 
     }
 
