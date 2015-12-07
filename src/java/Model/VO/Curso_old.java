@@ -3,21 +3,27 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Model;
+package Model.VO;
 
+import util.ExecuteSQL;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ApplicationScoped;
+import javax.persistence.Column;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author fernando
  */
+@XmlRootElement
 @ApplicationScoped
-public class Curso {
+public class Curso_old {
 
+    @Column(name = "id")
     private Integer id;
+    @Column(name = "nome")
     private String nome;
     private String nomeDisciplina;
     private String horas;
@@ -30,6 +36,7 @@ public class Curso {
     private String sala;
     private String diaSemana;
     private String turno;
+    @Column(name = "nome_professor")
     private String nomeProfessor;
     private String curriculo;
 
@@ -153,11 +160,11 @@ public class Curso {
         this.curriculo = curriculo;
     }
 
-    public List<Curso> list() {
+    public List<Curso_old> list() {
 
         try {
 
-            List<Curso> arrayList = new ArrayList();
+            List<Curso_old> arrayList = new ArrayList();
             ExecuteSQL exec = new ExecuteSQL();
             String sql = "select * "
                     + "from curso as c \n";
@@ -165,7 +172,7 @@ public class Curso {
             ResultSet rs = exec.executeQuery(sql);
 
             while (rs.next()) {
-                Curso c = new Curso();
+                Curso_old c = new Curso_old();
                 c.setId(Integer.parseInt(rs.getString("id")));
                 c.setNome(rs.getString("nome"));
                 arrayList.add(c);

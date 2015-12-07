@@ -1,6 +1,7 @@
  
-import Model.Curso;
-import Model.GradeCurricular;
+import Model.VO.Curso_old;
+import Model.VO.GradeCurricular;
+import Model.BO.GradeCurricularBO;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -13,13 +14,13 @@ import javax.faces.bean.ViewScoped;
 public class IndexBean implements Serializable {
   
  
-    private List<Curso> cursos;
+    private List<Curso_old> cursos;
      
-    private Curso selectedCurso;
+    private Curso_old selectedCurso;
       
     @PostConstruct
     public void init() {
-        GradeCurricular gc = new GradeCurricular();
+        GradeCurricularBO gc = new GradeCurricularBO();
         try{
             
         cursos = gc.list();
@@ -29,15 +30,15 @@ public class IndexBean implements Serializable {
         }
     }
     
-    public List<Curso> getCursos() {
+    public List<Curso_old> getCursos() {
         return cursos;
     }
      
-    public Curso getSelectedCurso() {
+    public Curso_old getSelectedCurso() {
         return selectedCurso;
     }
  
-    public void setSelectedCurso(Curso selectedCurso) {
+    public void setSelectedCurso(Curso_old selectedCurso) {
         this.selectedCurso = selectedCurso;
     }
     

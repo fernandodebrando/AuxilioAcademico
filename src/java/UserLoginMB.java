@@ -4,7 +4,9 @@
  * and open the template in the editor.
  */
 
-import Model.Usuario;
+import Model.BO.UsuarioBO;
+import Model.VO.Perfil;
+import Model.VO.Usuario;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -62,14 +64,15 @@ public class UserLoginMB {
         RequestContext context = RequestContext.getCurrentInstance();
         FacesMessage message = null;
         boolean loggedIn = false;
+        UsuarioBO userBO = new UsuarioBO();
         Usuario u = new Usuario();
         u.setEmail(username);
-        u.setSenha(password);
-
-        if (u.valida(u)) {
+        u.setPassword(password);
+        u = userBO.valida(u);
+        if (u.getId() > 0) {
             loggedIn = true;
             this.logado = true;
-            this.idPerfil = u.getIdPerfil();
+            this.idPerfil = u.getIdPerfil().getId();
             message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bem-vindo", username);
         } else {
             loggedIn = false;

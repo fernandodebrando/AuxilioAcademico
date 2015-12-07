@@ -1,15 +1,16 @@
-package Model;
+package Model.VO;
 
+import util.ExecuteSQL;
 import java.sql.ResultSet;
 
-public class Usuario {
+public class Usuario_old {
 
     private String email;
     private String senha;
     private Integer id;
     private Integer idPerfil; 
 
-    public Usuario() {
+    public Usuario_old() {
     }
 
     public String getEmail() {
@@ -44,7 +45,7 @@ public class Usuario {
         this.idPerfil = idPerfil;
     }
 
-    public boolean valida(Usuario obj) {
+    public boolean valida(Usuario_old obj) {
 
         if (obj == null) {
             return false;

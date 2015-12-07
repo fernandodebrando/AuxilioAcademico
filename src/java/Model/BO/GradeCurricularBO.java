@@ -3,9 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Model;
+package Model.BO;
 
+import Model.DAO.CursoDAO;
+import Model.VO.*;
+import util.ExecuteSQL;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ApplicationScoped;
@@ -15,7 +19,7 @@ import javax.faces.bean.ApplicationScoped;
  * @author fernando
  */
 @ApplicationScoped
-public class GradeCurricular {
+public class GradeCurricularBO {
 
     public String getDiaSemana(int diaS) {
 
@@ -46,11 +50,11 @@ public class GradeCurricular {
 
     }
 
-    public List<Curso> list() {
+    public List<Curso_old> list() {
 
         try {
 
-            List<Curso> arrayList = new ArrayList();
+            List<Curso_old> arrayList = new ArrayList();
             ExecuteSQL exec = new ExecuteSQL();
             String sql = "select *, p.nome as nome_professor, td.id as id_turma_disciplina,\n"
                     + "		(SELECT situacao \n"
@@ -64,9 +68,11 @@ public class GradeCurricular {
                     + "join cad_turma as ct on(t.id_cad_turma = ct.id) \n"
                     + "join professor as p on(p.id = td.id_professor)";
             ResultSet rs = exec.executeQuery(sql);
+            
+            // List<Curso_old> listGrade  = CursoDAO.getInstance().getByWhere(sql);
 
             while (rs.next()) {
-                Curso c = new Curso();
+                Curso_old c = new Curso_old();
                 c.setNome(rs.getString("nome"));
                 c.setNomeDisciplina(rs.getString("nome_disciplina"));
                 c.setHoras(rs.getString("horas"));
@@ -77,7 +83,7 @@ public class GradeCurricular {
                 c.setCompetenciaEssencial(rs.getString("competencia_essencial"));
                 c.setNivelDificuldade(rs.getString("nivel_dificuldade"));
                 c.setSala(rs.getString("sala"));
-                c.setDiaSemana(this.getDiaSemana(Integer.parseInt(rs.getString("dia_semana"))));
+                c.setDiaSemana(rs.getString("dia_semana"));
                 c.setTurno(rs.getString("turno"));
                 c.setNomeProfessor(rs.getString("nome_professor"));
                 c.setCurriculo(rs.getString("curriculo"));
@@ -86,7 +92,7 @@ public class GradeCurricular {
             }
 
             return arrayList;
-        } catch (Exception e) {
+        } catch (SQLException | NumberFormatException e) {
             System.out.println(e.getMessage());
         }
         return null;

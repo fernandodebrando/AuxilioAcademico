@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-import Model.ConexaoMySQL;
+import util.ConexaoMySQL;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 

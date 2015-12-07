@@ -1,6 +1,7 @@
 
+import Model.BO.CursoBO;
 import javax.faces.bean.ManagedBean;
-import Model.Curso;
+import Model.VO.Curso;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
@@ -24,10 +25,10 @@ public class CadastroCursoBean implements Serializable {
 
     @PostConstruct
     public void init() {
-        Curso c = new Curso();
+        CursoBO c = new CursoBO();
         try {
 
-            cursos = c.list();
+            cursos = c.getAll();
 
         } catch (Exception e) {
 
@@ -61,26 +62,27 @@ public class CadastroCursoBean implements Serializable {
     public void setNome(String nome) {
         this.nome = nome;
     }
-    
-    
 
-    public void salvar() {  
-         
+    public void salvar() {
+
+        CursoBO cbo = new CursoBO();
         Curso c = new Curso();
-        c.salvar(this.getId(), this.getNome());  
-        
+        c.setNome(this.getNome());
+        c.setId(this.getId());
+        cbo.salvar(c);
 
     }
 
     public void excluir(Curso curso) {
-        
+
+        CursoBO cbo = new CursoBO();
         Curso c = new Curso();
-        c.excluir(curso.getId());
+        c.setId(this.getId());
+        cbo.deletar(c);
     }
-    
-     public void buscar() {
-        
-        
+
+    public void buscar() {
+
     }
 
 }
